@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre Nosotros</title>
+</head>
+<body>
+    <h1 th:text="${titulo}">Titulo</h1>
+    <h4 th:text="${descripcion}">Una breve descripcion</h4>
+
+    <h3 th:text="'ID: ' + ${recambio.id}"></h3>
+    <p th:text="'Nombre: ' + ${recambio.nombre}"></p>
+    <p th:text="'Fecha Fabricación: ' + ${recambio.fechaFabricacion}"></p>
+    <p th:text="'Precio: ' + ${recambio.precio}"></p>
+    <p th:text="'Tipo Vehículo: ' + ${recambio.tipo}"></p>
+
+    <h3 th:text="'ID: ' + ${recambio.id}"></h3>
+    <p th:text="'Nombre: ' + ${recambio.nombre}"></p>
+    <p th:text="'Fecha Fabricación: ' + ${recambio.fechaFabricacion}"></p>
+    <p th:text="'Precio: ' + ${recambio.precio}"></p>
+    <p th:text="'Tipo Vehículo: ' + ${recambio.tipo}"></p>
+</body>
+</html>

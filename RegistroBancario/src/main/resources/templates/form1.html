@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - Paso 1</title>
+</head>
+<body>
+
+<nav th:replace="fragmentos/navbar::navbar"></nav>
+
+<form th:action="@{/paso2}" th:object="${persona}" method="post">
+    <fieldset>
+        <legend>Datos personales</legend>
+        <div>
+            <label for="nombre">Nombre</label>
+            <input th:field="*{nombre}" type="text" id="nombre"/>
+            <label for="apellidos">Apellidos</label>
+            <input th:field="*{apellidos}" type="text" id="apellidos"/>
+        </div>
+        <div>
+            <label for="FechaNacimiento">Fecha Nacimiento</label>
+            <input th:field="*{fechaNac}" type="date" id="FechaNacimiento"/>
+        </div>
+        <fieldset>
+            <legend>Género</legend>
+            <div th:each="genero : ${T(es.carlosnh.registrobancario.entidades.Genero).values()}">
+                <div>
+                    <input type="radio" th:field="*{genero}" th:value="${genero}" >
+                    <label th:for="${#ids.prev('genero')}"
+                           th:text="${genero}">Género</label>
+                </div>
+            </div>
+        </fieldset>
+        <div>
+            <label for="estadoCivil">Estado Civil</label>
+            <select th:field="*{estadoCivil}" id="estadoCivil" name="estadoCivil">
+                <option value="" selected>- seleccione -</option>
+                <option th:each="estadoCivil : ${T(es.carlosnh.registrobancario.entidades.EstadoCivil).values()}"
+                        th:value="${estadoCivil}" th:text="${estadoCivil}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="nacionalidades">Nacionalidades</label>
+            <select th:field="*{nacionalidad}" id="nacionalidades" name="nacionalidades" size="5" multiple>
+                <option th:each="nacionalidad : ${T(es.carlosnh.registrobancario.entidades.Nacionalidad).values()}"
+                        th:value="${nacionalidad}" th:text="${nacionalidad}"></option>
+            </select>
+        </div>
+        <button type="submit">Grabar información e ir al paso 2 - Datos profesionales</button>
+    </fieldset>
+</form>
+</body>
+</html>

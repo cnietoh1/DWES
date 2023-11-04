@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - Paso 3</title>
+</head>
+<body>
+
+<nav th:replace="fragmentos/navbar::navbar"></nav>
+
+<form method="post"
+      th:action="@{/resumen}"
+        th:object="${persona}">
+    <fieldset>
+        <legend>Datos bancarios</legend>
+        <div>
+            <label for="cuentaCorriente">Cuenta corriente</label>
+            <input type="text" id="cuentaCorriente"/>
+        </div>
+        <button type="submit">Grabar información e ir al resumen final</button>
+    </fieldset>
+</form>
+</body>
+</html>
