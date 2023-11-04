@@ -1,0 +1,36 @@
+<nav th:fragment="nav-bar"
+     class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}"><img src="/img/coche.png" alt="coche" width="40px" height="40px"></a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/coche/list}">Listado</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/coche/new}">Añadir</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{''(lang=es_ES)}">Español</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{''(lang=en_US)}">Inglés</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Opciones
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Login</a></li>
+                        <li><a class="dropdown-item" href="#">Registro</a></li>
+                        <li><a class="dropdown-item" href="#">Salir</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
