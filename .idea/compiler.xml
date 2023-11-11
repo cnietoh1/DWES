@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PracticaControladores" />
+        <module name="RegistroBancario" />
         <module name="SpringBoot_CarlosNieto" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="RegistroBancario" target="17" />
+      <module name="PracticaControladores" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

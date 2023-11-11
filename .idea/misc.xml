@@ -7,7 +7,13 @@
         <option value="$PROJECT_DIR$/PracticaControladores/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBoot_CarlosNieto/pom.xml" />
         <option value="$PROJECT_DIR$/RegistroBancario_CarlosNietoHernández/RegistroBancario/pom.xml" />
+        <option value="$PROJECT_DIR$/RegistroBancario/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/PracticaControladores/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK">
