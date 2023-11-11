@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>El Ahorcado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Agrega aquí tus enlaces a estilos CSS si los tienes -->
+</head>
+<body>
+
+<h1>El juego del Ahorcado</h1>
+
+<p th:if="${finJuego}">GAME OVER!!!</p>
+
+<p th:text="'Palabra: ' + ${adivinarPalabra}"></p>
+<p th:text="'Intentos Restantes: ' + ${intentos}"></p>
+
+<!-- Mostrar el muñeco del ahorcado -->
+<pre th:text="${muneco}"></pre>
+
+<form th:action="@{/adivinar}" method="post">
+    <label for="letter">Introduce una letra: </label>
+    <input type="text" id="letter" name="letter" maxlength="1" required>
+    <button type="submit">Adivinar</button>
+</form>
+
+<form th:action="@{/reset}">
+    <button type="submit" class="btn btn-primary">Reset</button>
+</form>
+
+<div>
+    <a th:href="@{/logout}">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+</div>
+
+</body>
+</html>
