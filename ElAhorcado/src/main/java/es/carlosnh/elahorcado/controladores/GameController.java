@@ -1,5 +1,6 @@
 package es.carlosnh.elahorcado.controladores;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -7,15 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.security.Principal;
 import java.util.*;
 
 @Controller
 public class GameController {
+    // Lista de palabras para el juego
     private List<String> palabras = Arrays.asList("java", "spring", "thymeleaf", "ahorcado", "vue", "angular", "react", "javascript", "frontend", "backend");
+    // Palabra seleccionada para el juego
     private String palabra;
+    // Arreglo para mostrar las letras adivinadas
     private char[] adivinarPalabra;
+    // Número de intentos restantes
     private int intentos;
     private Set<Character> letrasIntentadas = new HashSet<>();
     private Set<Character> letrasAcertadas = new HashSet<>();
@@ -24,7 +30,7 @@ public class GameController {
     public String index(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-
+        // Inicia un nuevo juego
         empezarJuego();
         model.addAttribute("adivinarPalabra", String.valueOf(adivinarPalabra));
         model.addAttribute("intentos", intentos);
@@ -66,7 +72,7 @@ public class GameController {
             if (intentos == 0) {
                 model.addAttribute("finJuego", "GAME OVER");
             } else if (!Arrays.toString(adivinarPalabra).contains("_")) {
-                model.addAttribute("finJuego", "FINALIZADO");
+                model.addAttribute("finJuego", "HAS GANADO");
             }
         }
 
@@ -82,9 +88,15 @@ public class GameController {
 
     @PostMapping("/terminar")
     public String terminarPartida(Model model) {
-        empezarJuego(); // Reiniciar variables de juego u otras acciones necesarias
+        empezarJuego(); // Reinicia variables de juego
 
         // Redirige de nuevo a la página principal
+        return "redirect:/";
+    }
+
+    @PostMapping("/local")
+    public String cambiarLocal(@RequestParam String lang, HttpServletRequest request) {
+        request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, new Locale(lang));
         return "redirect:/";
     }
 
