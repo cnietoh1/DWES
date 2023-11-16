@@ -1,0 +1,34 @@
+<table class="table table-striped" id="listaCanciones" th:fragment="listaCanciones">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Titulo</th>
+    <th>Nombre Artista</th>
+    <th>Fecha Publicacion</th>
+    <th>Duracion</th>
+    <th>Tipo</th>
+    <th>Like</th>
+    <th sec:authorize="hasRole('ROLE_ADMIN')">Operaciones</th>
+  </thead>
+  <tbody>
+  <tr th:each="cancion : ${listaCanciones}">
+    <td class="cancionId" th:text="${cancion.id}">ID</td>
+    <td th:text="${cancion.titulo}">Titulo</td>
+    <td th:text="${cancion.nombreArtista}">Melendi/td>
+    <td th:text="${cancion.fechaPubli}">0000-00-00</td>
+    <td th:text="${cancion.duracion}">3</td>
+    <td th:text="${cancion.tipo}">CLASICA</td>
+    <td>
+      <span th:if="${cancion.like}" th:text="Sí">Sí</span>
+      <span th:unless="${cancion.like}" th:text="No">No</span>
+    </td>
+    <td sec:authorize="hasRole('ROLE_ADMIN')">
+      <a th:href="@{/song/edit/{id}(id=${cancion.id})}" aria-label="Editar">
+        <span class="fas fa-edit" aria-hidden="true"></span></a>
+      <a href="#" class="lnkBorrarCancion" aria-label="Borrar">
+        <span class="fas fa-trash" aria-hidden="true"></span></a>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
