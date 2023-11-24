@@ -1,0 +1,54 @@
+<nav th:fragment="nav-bar"
+     class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}"><img src="/img/coche.png" alt="coche" width="40px" height="40px"></a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#" th:href="@{/}">
+                        <i class="fa fa-home"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/coche/list}">Listado</a>
+                </li>
+                <li class="nav-item">
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" th:href="@{/coche/new}">
+                        <i class="fas fa-plus-circle"></i> Añadir</a></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{''(lang=es_ES)}">Español</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{''(lang=en_US)}">Inglés</a></li>
+                <li sec:authorize="!isAuthenticated()" class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/login}">
+                        <i class="fa fa-user"></i> Iniciar Sesión</a>
+                </li>
+
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <span th:text="${#authentication.name}">Opciones</span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <span class="dropdown-item" th:text="#{header.menu.visitas} + ' App: ' + ${session.numVisitasApp}"></span>
+                        </li>
+                        <li>
+                            <span class="dropdown-item" th:text="#{header.menu.visitas} + ' index: ' + ${session.numVisitasIndex}"></span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
+                            <i class="fas fa-sign-out-alt"></i> Salir</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <form th:action="@{/logout}" method="post" id="logoutForm"></form>
+        </div>
+    </div>
+</nav>

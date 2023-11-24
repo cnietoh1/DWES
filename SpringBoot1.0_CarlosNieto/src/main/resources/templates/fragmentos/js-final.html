@@ -1,0 +1,5 @@
+<th:block th:fragment="js(scripts)">
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- Scripts adicionales -->
+    <th:block th:replace="${scripts}" />
+</th:block>

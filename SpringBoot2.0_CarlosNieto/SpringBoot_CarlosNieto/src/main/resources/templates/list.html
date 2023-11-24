@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragmentos/head::encabezado(~{::title}, ~{::link})">
+    <title>Listado Coches</title>
+
+    <link th:href="@{/css/list.css}" rel="stylesheet">
+</head>
+<body>
+
+<nav th:replace="fragmentos/navbar::nav-bar"></nav>
+
+<div class="container-fluid">
+    <div class="card">
+        <h3>Listado de vehículos</h3>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>CV</th>
+                    <th>Núm Bastidor</th>
+                    <th>Fecha Matriculacion</th>
+                    <th>Tipo Coche</th>
+                    <th>Tipo Combustible</th>
+                    <th>Version Motor</th>
+                    <th>Kilometráje</th>
+                    <th>Operaciones</th>
+                </thead>
+                <tbody>
+                <tr th:each="coche : ${listaCoches}">
+                    <td class="cocheId" th:text="${coche.id}">ID</td>
+                    <td th:text="${coche.marca}">Marca</td>
+                    <td th:text="${coche.modelo}">Modelo</td>
+                    <td th:text="${coche.cv}">CV</td>
+                    <td th:text="${coche.numBastidor}">000000</td>
+                    <td th:text="${coche.fechaMatriculacion}">01/12/2001</td>
+                    <td th:text="${coche.tipoCoche}">BERLINA</td>
+                    <td th:text="${coche.tipoCombustible}">GASOLINA</td>
+                    <td th:text="${coche.versionMotor}">1.9 TDI</td>
+                    <td th:text="${coche.km}">111111</td>
+                    <td>
+                        <a th:href="@{/coche/edit/{id}(id=${coche.id})}" aria-label="Editar">
+                        <span class="fas fa-edit" aria-hidden="true"></span></a>
+
+                        <a href="#" id="borrarCoche" aria-label="Borrar">
+                            <span class="fas fa-trash" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="modal1"></div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragmentos/js-final::js(~{::script})">
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/coche.js}"></script>
+</th:block>
+
+</body>
+</html>

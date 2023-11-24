@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragmentos/head::encabezado(~{::title}, ~{})">
+    <title>Formulario</title>
+</head>
+
+<body>
+
+<nav th:replace="fragmentos/navbar::nav-bar"></nav>
+
+<form method="post" action="#"
+      th:action="${modoEdicion} ? @{/coche/edit/submit} : @{/coche/new/submit}"
+      th:object="${cocheDto}">
+    <h4 th:text="${modoEdicion} ? 'Editar coche' : 'Nuevo coche'">Nuevo coche</h4>
+    <div>
+        <div class="input-group mb-3"
+             th:classappend="${#fields.hasErrors('id')} ? 'has-error'">
+            <label class="form-label" for="id" >Id</label>
+            <input class="form-control" type="number" id="id" placeholder="ID" th:field="*{id}"
+                   th:attrappend="readonly=${cocheDto.id != null and modoEdicion} ? 'readonly' : null" />
+            <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"
+                  class="help-block" id="id-error">Errores</span>
+        </div>
+        <div class="input-group mb-3"
+             th:classappend="${#fields.hasErrors('marca')} ? 'has-error'">
+            <label class="form-label" for="marca" th:text="#{coche.form.marca}">Marca</label>
+            <input class="form-control" type="text" id="marca" placeholder="Marca" th:field="*{marca}" />
+            <span th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"
+                  class="help-block" id="marca-error">Errores</span>
+        </div>
+        <div class="input-group mb-3"
+             th:classappend="${#fields.hasErrors('modelo')} ? 'has-error'">
+            <label class="form-label" for="modelo" th:text="#{coche.form.modelo}">Modelo</label>
+            <input class="form-control" type="text" id="modelo" placeholder="Marca" th:field="*{modelo}" />
+            <span th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"
+                  class="help-block" id="modelo-error">Errores</span>
+        </div>
+        <div class="input-group mb-3">
+            <label class="form-label" for="cv" th:text="#{coche.form.cv}">CV</label>
+            <input class="form-control" type="number" id="cv" placeholder="CV" th:field="*{cv}" />
+        </div>
+        <div class="input-group mb-3">
+            <label class="form-label" for="numBastidor" >Núm Bastidor</label>
+            <input class="form-control" type="number" id="numBastidor" placeholder="Núm Bastidor" th:field="*{numBastidor}" />
+        </div>
+        <div class="input-group mb-3">
+            <label class="form-label" for="fechaMatriculacion" >Fecha Matri.</label>
+            <input class="form-control" type="date" id="fechaMatriculacion" placeholder="Fecha Matri." th:field="*{fechaMatriculacion}" />
+        </div>
+        <div class="form-select"
+             th:classappend="${#fields.hasErrors('tipoCoche')} ? 'has-error'">
+            <select th:field="*{tipoCoche}">
+                <option value="" selected>seleccione un tipo de carroceria</option>
+                <option th:each="tipoCoche : ${T(es.carlosnh.springboot_carlosnieto.entidades.TipoCoche).values()}"
+                        th:value="${tipoCoche}" th:text="${tipoCoche}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('tipoCoche')}" th:errors="*{tipoCoche}"
+                  class="help-block" id="tipoCoche-error">Errores</span>
+        </div>
+        <div class="form-select"
+             th:classappend="${#fields.hasErrors('tipoCombustible')} ? 'has-error'">
+            <select th:field="*{tipoCombustible}">
+                <option value="" selected>seleccione un tipo de combustible</option>
+                <option th:each="tipoCombustible : ${T(es.carlosnh.springboot_carlosnieto.entidades.TipoCombustible).values()}"
+                        th:value="${tipoCombustible}" th:text="${tipoCombustible}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('tipoCombustible')}" th:errors="*{tipoCombustible}"
+                  class="help-block" id="tipoCombustible-error">Errores</span>
+        </div>
+
+        <div class="input-group mb-3">
+            <label class="form-label" for="versionMotor" th:text="#{coche.form.versionMotor}">CV</label>
+            <input class="form-control" type="text" id="versionMotor" placeholder="Version Motor" th:field="*{versionMotor}" />
+        </div>
+        <div class="input-group mb-3">
+            <label class="form-label" for="km" th:text="#{coche.form.km}">KM</label>
+            <input class="form-control" type="number" id="km" placeholder="Kilometráje" th:field="*{km}" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+<th:block th:replace="fragmentos/js-final::js(~{})"></th:block>
+
+</body>
+</html>
