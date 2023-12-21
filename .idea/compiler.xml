@@ -7,11 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="RegistroBancario" />
-        <module name="SpringBoot_CarlosNieto" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="PracticaControladores" target="17" />
+      <module name="SpringBoot_CarlosNieto" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

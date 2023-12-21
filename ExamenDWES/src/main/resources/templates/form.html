@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragmentos/head::encabezado(~{::title}, ~{})}">
+    <title>Formulario</title>
+</head>
+
+<body>
+
+<nav th:replace="~{fragmentos/panel::panel-control}"></nav>
+
+<form method="post" action="#" enctype="multipart/form-data"
+      th:action="${modoEdicion} ? @{/song/edit/submit} : @{/song/new/submit}"
+      th:object="${cancionDto}">
+    <h4 th:text="${modoEdicion} ? 'Editar cancion' : 'Nueva cancion'">Nueva cancion</h4>
+    <div>
+        <input type="hidden" id="id" name="id" th:field="*{id}" />
+        <div class="input-group mb-3"
+             th:classappend="${#fields.hasErrors('titulo')} ? 'has-error'">
+            <label class="form-label" for="titulo" th:text="#{cancion.form.titulo}">Titulo</label>
+            <input class="form-control" type="text" id="titulo" th:placeholder="#{cancion.form.titulo.placeholder}" th:field="*{titulo}" />
+            <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"
+                  class="help-block" id="titulo-error">Errores</span>
+        </div>
+        <div class="input-group mb-3"
+             th:classappend="${#fields.hasErrors('nombreArtista')} ? 'has-error'">
+            <label class="form-label" for="nombreArtista" th:text="#{cancion.form.nombreArtista}">Nombre artista</label>
+            <input class="form-control" type="text" id="nombreArtista" th:placeholder="#{cancion.form.nombreArtista.placeholder}" th:field="*{nombreArtista}" />
+            <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{nombreArtista}"
+                  class="help-block" id="nombreArtista-error">Errores</span>
+        </div>
+        <div class="input-group mb-3"
+             th:classappend="${#fields.hasErrors('duracion')} ? 'has-error'">
+            <label class="form-label" for="duracion"  th:text="#{cancion.form.duracion}">Duracion</label>
+            <input class="form-control" type="number" id="duracion" th:placeholder="#{cancion.form.duracion.placeholder}" th:field="*{duracion}" />
+            <span th:if="${#fields.hasErrors('duracion')}" th:errors="*{duracion}"
+                  class="help-block" id="duracion-error">Errores</span>
+        </div>
+        <div class="input-group mb-3"
+             th:classappend="${#fields.hasErrors('fechaPubli')} ? 'has-error'">
+            <label class="form-label" for="fechaPubli" >Fecha Publi.</label>
+            <input class="form-control" type="date" id="fechaPubli" th:placeholder="#{cancion.form.fechaPubli.placeholder}" th:field="*{fechaPubli}" />
+            <span th:if="${#fields.hasErrors('fechaPubli')}" th:errors="*{fechaPubli}"
+                  class="help-block" id="fechaPubli-error">Errores</span>
+        </div>
+        <div class="input-group mb-3"
+             th:classappend="${#fields.hasErrors('numeroRepro')} ? 'has-error'">
+            <label class="form-label" for="numeroRepro"  th:text="#{cancion.form.numeroRepro}">Num. Repro.</label>
+            <input class="form-control" type="number" id="numeroRepro" th:placeholder="#{cancion.form.numeroRepro.placeholder}" th:field="*{duracion}" />
+            <span th:if="${#fields.hasErrors('numeroRepro')}" th:errors="*{numeroRepro}"
+                  class="help-block" id="numeroRepro-error">Errores</span>
+        </div>
+        <div class="form-select"
+             th:classappend="${#fields.hasErrors('valoracion')} ? 'has-error'">
+            <select th:field="*{valoracion}">
+                <option value="" selected>seleccione valoracion</option>
+                <option th:each="valoracion : ${T(es.calosnh.examendwes.entidades.Valoracion).values()}"
+                        th:value="${valoracion}" th:text="${valoracion}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('valoracion')}" th:errors="*{valoracion}"
+                  class="help-block" id="valoracion-error">Errores</span>
+        </div>
+        <div class="form-select"
+             th:classappend="${#fields.hasErrors('genero')} ? 'has-error'">
+            <select th:field="*{genero}">
+                <option value="" selected>seleccione genero cancion</option>
+                <option th:each="genero : ${listaGeneros}"
+                        th:value="${genero.id}" th:text="${genero.nombre}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"
+                  class="help-block" id="genero-error">Errores</span>
+        </div>
+
+        <div class="mb-3">
+            <input class="form-check-input" type="checkbox" id="like" th:field="*{like}">
+            <label class="form-check-label" for="like">Like</label>
+        </div>
+
+        <div class="input-group mb-3">
+            <label for="fichero">Foto</label>
+            <input type="hidden" th:field="*{foto}">
+            <img th:if="${cancionDto.foto != null}"
+                 id="image-preview" th:src="@{*{foto}}" alt="imagen previa de cancion">
+            <input type="file" id="fichero" name="fichero" class="form-control" >
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+<th:block th:replace="~{fragmentos/js-final::jsfinal(~{::script})}">
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/cancion.js}"></script>
+</th:block>
+
+</body>
+</html>

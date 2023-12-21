@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragmentos/head::encabezado(~{::title}, ~{::link})}">
+    <title>Listado</title>
+
+    <!-- Estilo propio -->
+    <link th:href="@{/css/list.css}" rel="stylesheet">
+</head>
+
+<body>
+<nav th:replace="~{fragmentos/panel::panel-control}"></nav>
+
+<div class="container-fluid">
+    <div class="card">
+        <h3>Lista de canciones</h3>
+        <form method="post" action="#">
+            <label for="buscarPorTitulo" class="form-label">Filtrar por titulo</label>
+            <input type="text" class="form-control" id="buscarPorTitulo" placeholder="Titulo" name="titulo">
+
+        </form>
+        <div class="card-body">
+            <table th:replace="~{fragmentos/listaCanciones::listaCanciones}"></table>
+
+
+            <!-- div para el modal -->
+            <div id="paraelmodal"></div>
+        </div>
+    </div>
+</div>
+
+
+<th:block th:replace="~{fragmentos/js-final::jsfinal(~{::script})}">
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/js/cancion.js}"></script>
+</th:block>
+</body>
+</html>
